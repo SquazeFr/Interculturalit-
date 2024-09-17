@@ -8,10 +8,18 @@
 <body>
     <div id="game-area">
         <div id="character"></div>
+        <!-- Ajout de six zones cibles avec des liens différents -->
+        <div class="target-zone" data-link="https://fr.wikipedia.org/wiki/Rickroll" style="top: 100px; left: 100px;"></div>
+        <div class="target-zone" data-link="https://fr.wikipedia.org/wiki/Rickroll" style="top: 300px; left: 300px;"></div>
+        <div class="target-zone" data-link="https://fr.wikipedia.org/wiki/Rickroll" style="top: 500px; left: 500px;"></div>
+        <div class="target-zone" data-link="https://fr.wikipedia.org/wiki/Rickroll" style="top: 700px; left: 700px;"></div>
+        <div class="target-zone" data-link="https://fr.wikipedia.org/wiki/Rickroll" style="top: 900px; left: 100px;"></div>
+        <div class="target-zone" data-link="https://fr.wikipedia.org/wiki/Rickroll" style="top: 970px; left: 300px;"></div>
     </div>
 
     <script>
         let character = document.getElementById('character');
+        let targetZones = Array.from(document.getElementsByClassName('target-zone'));
         let characterPosition = { top: 0, left: 0 }; // Position initiale du personnage
         let moveSpeed = 5; // Vitesse de déplacement du personnage
         let keysPressed = {}; // Object to track multiple keys
@@ -45,15 +53,53 @@
             character.style.top = characterPosition.top + 'px';
             character.style.left = characterPosition.left + 'px';
 
+            // Vérifier si le personnage est dans une des zones cibles
+            checkTargetZones();
+
             // Demander à mettre à jour la position au prochain frame
             requestAnimationFrame(updatePosition);
+        }
+
+        // Fonction pour vérifier si le personnage est dans une des zones cibles
+        function checkTargetZones() {
+            let charTop = characterPosition.top;
+            let charLeft = characterPosition.left;
+            let charWidth = character.offsetWidth;
+            let charHeight = character.offsetHeight;
+
+            let inAnyZone = false;
+
+            targetZones.forEach(zone => {
+                let targetTop = parseInt(zone.style.top);
+                let targetLeft = parseInt(zone.style.left);
+                let targetWidth = zone.offsetWidth;
+                let targetHeight = zone.offsetHeight;
+
+                if (charTop < targetTop + targetHeight &&
+                    charTop + charHeight > targetTop &&
+                    charLeft < targetLeft + targetWidth &&
+                    charLeft + charWidth > targetLeft) {
+                    zone.classList.add('active');
+                    inAnyZone = true;
+                } else {
+                    zone.classList.remove('active');
+                }
+            });
+
+            // Si le personnage est dans une zone active et qu'Enter est pressé, ouvrir le lien
+            if (inAnyZone && keysPressed['enter']) {
+                let activeZone = targetZones.find(zone => zone.classList.contains('active'));
+                if (activeZone) {
+                    window.location.href = activeZone.getAttribute('data-link');
+                }
+            }
         }
 
         // Écouteur pour détecter les touches du clavier
         window.addEventListener('keydown', (event) => {
             keysPressed[event.key.toLowerCase()] = true;
         });
-        
+
         window.addEventListener('keyup', (event) => {
             delete keysPressed[event.key.toLowerCase()];
         });
@@ -61,34 +107,48 @@
         // Démarrer l'animation
         updatePosition();
     </script>
+
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        #game-area {
+            position: relative;
+            width: 1920px;
+            height: 970px;
+            border: 2px solid #000;
+            background-color: #e0e0e0;
+            overflow-y: auto;
+            overflow-x: auto; /* Assurer que le personnage ne sort pas de la zone de jeu */
+        }
+
+        #character {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .target-zone {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 0, 0, 0.5); /* Couleur de la zone cible avec transparence */
+            border: 2px solid #f00;
+            z-index: 0;
+        }
+
+        .target-zone.active {
+            background-color: rgba(0, 255, 0, 0.5); /* Couleur modifiée lorsque le personnage est dans la zone */
+        }
+    </style>
 </body>
 </html>
-
-<style>
-    body {
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: #f0f0f0;
-    }
-
-    #game-area {
-        position: relative;
-        width: 1920px;
-        height: 970px;
-        border: 2px solid #000;
-        background-color: #e0e0e0;
-        overflow-y: auto;
-        overflow-x: auto; /* Assurer que le personnage ne sort pas de la zone de jeu */
-    }
-
-    #character {
-        position: absolute;
-        width: 40px;
-        height: 40px;
-        background-color: #4CAF50;
-        border-radius: 50%;
-    }
-</style>

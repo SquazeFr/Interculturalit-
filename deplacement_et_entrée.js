@@ -122,23 +122,7 @@
         // Vérifie si le Konami Code a été correctement saisi
         if (userInput.toString() === konamiCode.toString()) {
             const img = document.getElementById('hiddenImage');
-            img.style.display = 'block'; // Affiche l'image
-
-        }
-    });
-
-        // Fonction pour quitter le plein écran
-        function closeFullscreen() {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            } else if (document.mozCancelFullScreen) { // Pour Firefox
-                document.mozCancelFullScreen();
-            } else if (document.webkitExitFullscreen) { // Pour Chrome, Safari et Opera
-                document.webkitExitFullscreen();
-            } else if (document.msExitFullscreen) { // Pour IE/Edge
-                document.msExitFullscreen();
-            }
-        }
+            img.style.display = 'block'; // Affiche 
 
     // Écouteur pour cacher l'image et quitter le plein écran lorsque "Échap" est pressé
     window.addEventListener('keydown', function(event) {

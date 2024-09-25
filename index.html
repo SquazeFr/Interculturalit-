@@ -1,45 +1,57 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="konami.css">
+    <title></title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
-    <div id="game-area">
-        <div id="character"></div>
-        <!-- Ajout de six zones cibles avec des liens différents -->
-        <div class="target-zone" data-link="https://fr.wikipedia.org/wiki/Rickroll" style="top: 50px; left: 50px;">
-            <img src="bulle.png">
-        </div>
-        <div class="target-zone" data-link="https://fr.wikipedia.org/wiki/Rickroll" style="top: 50px; left: 200px;">
-            <img src="bulle.png">
-        </div>
-        <div class="target-zone" data-link="https://fr.wikipedia.org/wiki/Rickroll" style="top: 50px; left: 350px;">
-            <img src="bulle.png">
-        </div>
-        <div class="target-zone" data-link="https://fr.wikipedia.org/wiki/Rickroll" style="top: 50px; left: 500px;">
-            <img src="bulle.png">
-        </div>
-        <div class="target-zone" data-link="https://fr.wikipedia.org/wiki/Rickroll" style="top: 50px; left: 650px;">
-            <img src="bulle.png">
-        </div>
-        <div class="target-zone" data-link="https://fr.wikipedia.org/wiki/Rickroll" style="top: 50px; left: 800px;">
-            <img src="bulle.png">
-        </div>
-
-        <img id="hiddenImage" src="hacked.png" alt="Image secrète">
-        
+    <div class="title">
+        <h1>Interculturalité</h1>
     </div>
-
-
     
+    <div class="carrousel-gene">
+        <div class="container">
+            <div class="container-carrousel">
+                <div class="carrousel">
+                    <div class="carrousel-item">
+                            <!-- Bouton pour ouvrir le pop-up -->
+    <button id="openPopup" class="btn-popup">Découvrir le Pop-up</button>
 
-    <script src="deplacement_et_entrée.js"></script>
+    <!-- Le Pop-up -->
+    <div id="popup" class="popup-container">
+        <div class="popup-content">
+            <span class="close-button">&times;</span>
+            <h1>Bienvenue</h1>
+            <p>Découvrez un joli pop-up moderne avec du contenu multimédia élégant.</p>
 
+            <!-- Image -->
+            <img src="ile.png" alt="Image élégante" class="popup-image">
 
+            <!-- Audio -->
+            <audio controls class="popup-audio">
+                <source src="audio.mp3" type="audio/mpeg">
+                Votre navigateur ne supporte pas la balise audio.
+            </audio>
+        </div>
+    </div>
+                    </div>
+                    <div class="carrousel-item"></div>
+                    <div class="carrousel-item"></div>
+                    <div class="carrousel-item"></div>
+                    <div class="carrousel-item"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./script.js"></script>
+    <script src="./popup.js"></script>
 </body>
+
 </html>
-
-

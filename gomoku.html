@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josh Waitzkin</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&display=swap">
+    <style>
+        /* CSS de la page en noir et blanc */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.8;
+        }
+
+        header {
+            background: #587996;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto;  /* Centre le conteneur sur la page */
+            background-color: #ffffff;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: #000000;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        p {
+            text-align: justify;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: space-between;
+
+        }
+
+        .image-container img {
+            width: 48%;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.05);  /* Effet de zoom au survol */
+        }
+
+        audio {
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px 0;
+            background: linear-gradient(135deg, #ffffff, #000000);
+            color: white;
+            margin-top: 30px;
+            border-radius: 10px;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Gomoku : un jeu aux enjeux inattendus</h1>
+    </header>
+
+    <main>
+        <section class="content">
+            <p>
+                Le gomoku, jeu de stratégie classique japonais, consiste à aligner cinq pierres sur une grille. Malgré ses règles simples, il exige une réflexion stratégique intense. Mais au-delà de l’apparence d’un jeu calme et réfléchi, il peut aussi déclencher des moments inattendus.
+
+Une anecdote célèbre remonte à un tournoi de gomoku en Corée du Sud dans les années 1990. Lors d'une finale tendue, un joueur, au bord de la défaite, a soudainement décidé de ne pas poser son dernier pion. Il est resté assis, immobile, face à son adversaire, pendant près de 10 minutes, plongeant la salle dans un silence complet. Quand les juges lui ont demandé s’il abandonnait, il a simplement répondu : "Je n’ai pas perdu tant que je n’ai pas joué." Ce moment est entré dans la légende du gomoku pour illustrer la tension psychologique que peut générer un jeu si simple en apparence.
+
+Aujourd'hui, le gomoku continue d’être un jeu qui combine stratégie, patience et maîtrise de soi, et des histoires comme celle-ci rappellent que chaque partie peut réserver des surprises.
+
+            </p>
+        </section>
+
+        <section class="image-container">
+            <img src="img/gomoku.webp" alt="" class="responsive">
+            <img src="img/gomoku2.webp" alt="" class="responsive">
+        </section>
+    </main>
+</body>
+
+</html>

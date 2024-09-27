@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CultureInside - Shibori</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&display=swap">
+    <style>
+        /* CSS de la page en noir et blanc */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.8;
+        }
+
+        header {
+            background: #587996;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto;  /* Centre le conteneur sur la page */
+            background-color: #ffffff;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: #000000;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        p {
+            text-align: justify;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: space-between;
+
+        }
+
+        .image-container img {
+            width: 48%;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.05);  /* Effet de zoom au survol */
+        }
+
+        audio {
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px 0;
+            background: linear-gradient(135deg, #ffffff, #000000);
+            color: white;
+            margin-top: 30px;
+            border-radius: 10px;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Le Bol Chantant Tibétain</h1>
+    </header>
+
+    <main>
+        <section class="content">
+            <p>
+                Fermez les yeux un instant et imaginez un son apaisant qui résonne dans l’air, transportant votre esprit vers un état de calme profond. Le bol chantant tibétain, ou tibetan singing bowl en anglais, est un instrument traditionnel utilisé dans la culture bouddhiste tibétaine pour la méditation et la guérison spirituelle. Écouter le son du bol chantant permet d'accéder à des états de relaxation profonde. Initialement, ces bols étaient des récipients en métal, mais leur utilisation pour la musique remonte aux années 1960, en réponse à l'intérêt croissant des touristes pour la culture himalayenne. Mais derrière ce son envoûtant, il y a un savoir-faire ancestral. Fabriqués généralement à partir d'un alliage de plusieurs métaux, souvent au nombre de sept, chaque métal étant associé à l'un des chakras, ce qui leur confère des vertus thérapeutiques. Qu'ils soient coulés ou martelés à la main, les bols chantants font partie intégrante des traditions artisanales et bouddhistes tibétaines. Ils sont un moyen de se reconnecter avec soi-même à travers l’harmonie de leurs sons.
+            </p>
+        </section>
+
+        <section class="image-container">
+            <img src="img/bol1.webp" alt="Bol chantant Tibétain" class="responsive">
+            <img src="img/bol2.webp" alt="Bol chantant Tibétain" class="responsive">
+        </section>
+        <section class="audio-container">
+            <audio controls>
+                <source src="audio/Bol chantant tibétain Art Antique, 6 métaux - Diamètre de 20cm, 1000gr en Sol# 440Hz.mp3" type="audio/mpeg">
+                
+            </audio>
+        </section>
+    </main>
+</body>
+
+</html>

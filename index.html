@@ -69,6 +69,28 @@
             background-color: #f0f0f0;
             text-align: center;
         }
+
+        /* Styles pour le plateau de jeu de dames */
+        .popup {
+            display: none; /* Le plateau est caché au départ */
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            z-index: 10;
+        }
+        table { border-collapse: collapse; margin: 20px 0; }
+        td { width: 50px; height: 50px; text-align: center; vertical-align: middle; }
+        .black { background-color: #444; }
+        .white { background-color: #fff; }
+        .piece { cursor: pointer; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
+        .red-piece { background-color: #F44336; border-radius: 50%; }
+        .blue-piece { background-color: #2196F3; border-radius: 50%; }
+        .turn { font-size: 20px; margin: 20px; }
+        #reset { margin-top: 20px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        #close { margin-top: 10px; padding: 10px 20px; font-size: 16px; cursor: pointer; background-color: #f44336; color: white; border: none; } /* Bouton Cacher le jeu en rouge */
     </style>
 </head>
 <body>
@@ -80,21 +102,168 @@
             Culture Inside
         </div>
     </header>
+    
     <div class="welcome-text">
         Bienvenue dans l'expérience<br>
         <strong>Culture Inside</strong><br>
         <p>Explorons ensemble le monde en perpétuelle évolution, entre diversité, dialogue et innovation.</p>
         <a href="#lower-section" class="btn">Découvrir l'île de l'interculturalité</a>
     </div>
+    
     <div class="definition-section">
         <h2>Interculturalité</h2>
-        
-        <p>L'interculturalité désigne l'interaction entre différentes cultures dans un esprit de dialogue et de partage. Elle permet de mieux comprendre les spécificités de chacun et d’enrichir notre propre vision du monde.
-        </p>
+        <p>L'interculturalité désigne l'interaction entre différentes cultures dans un esprit de dialogue et de partage. Elle permet de mieux comprendre les spécificités de chacun et d’enrichir notre propre vision du monde.</p>
     </div>
+
+    <!-- Section Plateau de Jeu de Dames -->
+    <div class="popup" id="popup">
+        <div class="turn" id="turn">C'est au tour des rouges</div>
+        <table id="board"></table>
+        <button id="reset">Recommencer</button>
+        <button id="close">Cacher le jeu</button> <!-- Bouton pour cacher le jeu -->
+    </div>
+
     <div id="lower-section" class="lower-section">
         <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.27/build/spline-viewer.js"></script>
         <spline-viewer loading-anim-type="spinner-big-dark" url="https://prod.spline.design/k9WE91fRhmGQW6O4/scene.splinecode"></spline-viewer>
     </div>
+
+    <script>
+        const board = document.getElementById('board');
+        const turnDisplay = document.getElementById('turn');
+        const resetButton = document.getElementById('reset');
+        const closeButton = document.getElementById('close'); // Sélecteur du bouton Cacher le jeu
+        const popup = document.getElementById('popup');
+        let currentPlayer = 'red';
+        let draggedPiece = null;
+
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+
+        // Fonction pour vérifier le Konami Code
+        const checkKonamiCode = (event) => {
+            if (event.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    popup.style.display = 'flex'; // Afficher le plateau de jeu
+                    document.removeEventListener('keydown', checkKonamiCode); // Désactiver l'écouteur une fois le code saisi
+                }
+            } else {
+                konamiIndex = 0; // Réinitialiser si la séquence est incorrecte
+            }
+        };
+
+        document.addEventListener('keydown', checkKonamiCode);
+
+        const createBoard = () => {
+            board.innerHTML = '';
+            for (let row = 0; row < 8; row++) {
+                const tr = document.createElement('tr');
+                for (let col = 0; col < 8; col++) {
+                    const td = document.createElement('td');
+                    td.className = (row + col) % 2 === 0 ? 'white' : 'black';
+                    td.dataset.position = `${row},${col}`;
+                    td.ondrop = handleDrop;
+                    td.ondragover = allowDrop;
+
+                    // Placer les pions rouges et bleus
+                    if (row < 3 && (row + col) % 2 !== 0) {
+                        const piece = createPiece('red');
+                        td.appendChild(piece);
+                    } else if (row > 4 && (row + col) % 2 !== 0) {
+                        const piece = createPiece('blue');
+                        td.appendChild(piece);
+                    }
+                    tr.appendChild(td);
+                }
+                board.appendChild(tr);
+            }
+        };
+
+        const createPiece = (color) => {
+            const piece = document.createElement('div');
+            piece.className = `piece ${color}-piece`;
+            piece.draggable = true;
+            piece.ondragstart = (event) => {
+                draggedPiece = piece;
+                event.dataTransfer.setData('text/plain', color);
+            };
+            return piece;
+        };
+
+        const allowDrop = (event) => {
+            event.preventDefault();
+        };
+
+        const handleDrop = (event) => {
+            event.preventDefault();
+            const color = event.dataTransfer.getData('text/plain');
+
+            // Vérifier que c'est le bon joueur qui joue
+            if (color === currentPlayer) {
+                const targetPosition = event.target.dataset.position;
+                const fromPosition = draggedPiece.parentElement.dataset.position;
+
+                // Vérifier si le déplacement est valide
+                if (isValidMove(fromPosition, targetPosition)) {
+                    movePiece(draggedPiece, event.target);
+                    if (checkVictory()) {
+                        alert(currentPlayer === 'red' ? 'Les bleus ont gagné !' : 'Les rouges ont gagné !');
+                        createBoard(); // Réinitialise le plateau après la victoire
+                    } else {
+                        currentPlayer = currentPlayer === 'red' ? 'blue' : 'red';
+                        turnDisplay.textContent = `C'est au tour des ${currentPlayer === 'red' ? 'rouges' : 'bleus'}`;
+                    }
+                }
+            }
+        };
+
+        const isValidMove = (from, to) => {
+            const [fromRow, fromCol] = from.split(',').map(Number);
+            const [toRow, toCol] = to.split(',').map(Number);
+
+            // Vérifie les mouvements de base
+            if (Math.abs(fromRow - toRow) === 1 && Math.abs(fromCol - toCol) === 1) {
+                return !board.rows[toRow].cells[toCol].firstChild; // case vide
+            }
+
+            // Vérifie les captures
+            if (Math.abs(fromRow - toRow) === 2 && Math.abs(fromCol - toCol) === 2) {
+                const middleRow = (fromRow + toRow) / 2;
+                const middleCol = (fromCol + toCol) / 2;
+                const middlePiece = board.rows[middleRow].cells[middleCol].firstChild;
+                if (middlePiece && middlePiece.className !== `${currentPlayer}-piece`) {
+                    middlePiece.remove(); // Capture le pion
+                    return true; // Déplacement avec capture
+                }
+            }
+
+            return false;
+        };
+
+        const movePiece = (piece, targetCell) => {
+            targetCell.appendChild(piece); // Déplace le pion
+        };
+
+        const checkVictory = () => {
+            const redPieces = document.getElementsByClassName('red-piece').length;
+            const bluePieces = document.getElementsByClassName('blue-piece').length;
+            return redPieces === 0 || bluePieces === 0;
+        };
+
+        resetButton.onclick = () => {
+            createBoard();
+            currentPlayer = 'red';
+            turnDisplay.textContent = "C'est au tour des rouges";
+        };
+
+        // Fonction pour cacher le jeu et revenir à la page précédente
+        closeButton.onclick = () => {
+            popup.style.display = 'none'; // Cacher le plateau de jeu
+        };
+
+        // Le plateau est initialisé mais caché
+        createBoard();
+    </script>
 </body>
 </html>

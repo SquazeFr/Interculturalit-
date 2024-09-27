@@ -1,11 +1,5 @@
-import Spline from '@splinetool/react-spline/next';
+import { Application } from '@splinetool/runtime';
 
-export default function Home() {
-return (
-    <main>
-    <Spline
-        scene="https://prod.spline.design/k9WE91fRhmGQW6O4/scene.splinecode" 
-    />
-    </main>
-);
-}
+const canvas = document.getElementById('canvas3d');
+const app = new Application(canvas);
+app.load('https://prod.spline.design/k9WE91fRhmGQW6O4/scene.splinecode');

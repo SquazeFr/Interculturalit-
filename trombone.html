@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CultureInside - Trombone</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&display=swap">
+    <style>
+        /* CSS de la page en noir et blanc */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.8;
+        }
+
+        header {
+            background: #587996;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto;  /* Centre le conteneur sur la page */
+            background-color: #ffffff;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: #000000;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        p {
+            text-align: justify;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: space-between;
+
+        }
+
+        .image-container img {
+            width: 48%;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.05);  /* Effet de zoom au survol */
+        }
+
+        audio {
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px 0;
+            background: linear-gradient(135deg, #ffffff, #000000);
+            color: white;
+            margin-top: 30px;
+            border-radius: 10px;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Le Trombone </h1>
+    </header>
+
+    <main>
+        <section class="content">
+            <p>
+                Il y a dans le trombone une sagesse ancienne, un équilibre entre puissance et subtilité. Sa coulisse, ce mécanisme simple en apparence, est une métaphore de la vie : un mouvement perpétuel, sans certitudes fixes, entre tension et relâchement. Il y a quelque chose de fascinant dans la simplicité apparente de cet instrument, et pourtant, il requiert une maîtrise subtile. Quand le tromboniste tire et pousse, il exprime par son souffle, sa fougue ou ses élans et pas seulement une note. Le trombone, dont le nom provient de l'italien, où tromba signifie trompette et le suffixe "-one" indique une grande taille. Il a traversé les siècles, né pendant la Renaissance sous le nom de sacqueboute, évoluant au rythme des harmonies et des révolutions musicales. Du chant cérémoniel de Gabrieli à la fougue du jazz, il résonne, tantôt grave et solennel, tantôt léger et vibrant. Mais toujours, dans son timbre, se cache un message : celui de l’humain, oscillant entre grandeur et fragilité, capable de remplir une salle de concert ou de dialoguer avec douceur dans un petit groupe. Il nous rappelle que la musique, au-delà des notes, est un langage universel
+            </p>
+        </section>
+
+        <section class="image-container">
+            <img src="img/trombone.webp" alt="schema des différente partie d'un trombone" class="responsive">
+            <img src="img/trombone1.webp" alt="un trombone" class="responsive">
+        </section>
+        <section class="audio-container">
+            <audio controls>
+                <source src="audio/trombone.mp3" type="audio/mpeg">
+                
+            </audio>
+        </section>
+    </main>
+</body>
+
+</html>
